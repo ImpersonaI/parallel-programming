@@ -1,0 +1,56 @@
+import java.util.Arrays;
+
+public class QuickSort {
+
+  public static void quickSort(int[] array, int bottom, int top) {
+    if (array.length == 0)
+      return;// завершить выполнение, если длина массива равна 0
+
+    if (bottom >= top)
+      return;// завершить выполнение если уже нечего делить
+
+    // выбрать опорный элемент
+    int middle = bottom + (top - bottom) / 2;
+    int kernel = array[middle];
+
+    // разделить на подмассивы, который больше и меньше опорного элемента
+    int i = bottom, j = top;
+    while (i <= j) {
+      while (array[i] < kernel) {
+        i++;
+      }
+
+      while (array[j] > kernel) {
+        j--;
+      }
+
+      if (i <= j) {// меняем местами
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+        i++;
+        j--;
+      }
+    }
+
+    // вызов рекурсии для сортировки левой и правой части
+    if (bottom < j)
+      quickSort(array, bottom, j);
+
+    if (top > i)
+      quickSort(array, i, top);
+  }
+
+  public static void main(String[] args) {
+    int[] x = { 8, 0, 4, 7, 3, 7, 10, 12, -3 };
+    System.out.println("Было");
+    System.out.println(Arrays.toString(x));
+
+    int bottom = 0;
+    int top = x.length - 1;
+
+    quickSort(x, bottom, top);
+    System.out.println("Стало");
+    System.out.println(Arrays.toString(x));
+  }
+}
